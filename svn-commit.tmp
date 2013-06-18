@@ -1,6 +1,0 @@
-modifications based on the redefined SPI interface with microcontroller
---This line, and those below, will be ignored--
-
-M    SPIDevices.h
-M    test.py
-M    SPIDevices.c
