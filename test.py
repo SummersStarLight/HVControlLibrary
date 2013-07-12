@@ -105,10 +105,10 @@ if (__name__ == "__main__"):
 	#PBBDevices.freeHardwareResources()
 	#
 	x = HVPrint()
-	#x.measureTemperature()
+	x.measureTemperature()
 	#x.enableHV()
-	x.measurePowerSupplies()
-	#x.setCLMidVoltage()
+	#x.measurePowerSupplies()
+	x.setCLMidVoltage()
 	
 	#	if error:
 #		syslog.syslog(syslog.LOG_ERR, 'Processing started')
