@@ -93,6 +93,28 @@ uint8_t HVEnableStatus(uint8_t slaveMode)
 	Usleep(SHORTSLEEP);
 	return temp;
 }
+/*
+To do transactions with the GPIO
+
+Control Byte :0x41 for reading 0x40 for writing
+Address Byte :use the register address 0x09 for GPIO configuration, consult datasheet for other registers
+data: the actual register data you want to write, in case of read don't care
+slave mode: use same as the mode used to select slave for now 0.
+*/
+
+uint8_t MCP23SRegisterTransaction(uint8_t controlByte,uint8_t address, uint8_t data, uint8_t slaveMode)
+{
+	uint8_t temp;
+        Usleep(SHORTSLEEP);
+        temp = SPIProtocol(controlByte,slaveMode,8);
+        Usleep(SHORTSLEEP);
+        temp = SPIProtocol(address,slaveMode,8);
+        Usleep(SHORTSLEEP);
+        temp = SPIProtocol(data,slaveMode,8);
+        Usleep(SHORTSLEEP);
+        return temp;
+}
+
 
 uint8_t configure7949(uint8_t channel,uint8_t spiMode)
 {
@@ -141,11 +163,11 @@ uint8_t read7949(uint8_t spiMode)
 
 uint8_t setDAC7731(uint8_t digInput,uint8_t slaveMode)
 {
-	uint8_t temp1,temp2;
+	uint8_t temp1;
 	Usleep(SHORTSLEEP);
-    temp1 =SPIProtocol(digInput,slaveMode,8);
-    Usleep(SHORTSLEEP);
-    return temp1;
+    	temp1 =SPIProtocol(digInput,slaveMode,8);
+    	Usleep(SHORTSLEEP);
+    	return temp1;
 }
 
 void deSelectSPISlaves(uint8_t slaveMode)
